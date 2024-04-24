@@ -13,34 +13,34 @@ typedef struct Queue
     Node **head, **tail;
 } Queue;
 
-Queue* new();
-bool is_empty(Queue* Q);
-int dequeue(Queue* Q) ;
-void enqueue(Queue* Q, int x)
+Queue new();
+bool is_empty(Queue Q);
+int dequeue(Queue Q) ;
+void enqueue(Queue Q, int x);
 
 
-Queue* new()
+Queue new()
 {
-    struct Queue Q;
-    Q.head = malloc(sizeof(Node*));
-    Q.tail = malloc(sizeof(Node*));
+    Queue Q;
+    Q.head = malloc(sizeof(Node));
+    Q.tail = malloc(sizeof(Node));
 
     *(Q.head) = *(Q.tail) = NULL;
     return Q;
 }
 
-bool is_empty(Queue* Q)
+bool is_empty(Queue Q)
 {
     return (*(Q.head) == NULL && *(Q.tail) == NULL);
 }
 
-int dequeue(Queue* Q)
+int dequeue(Queue Q)
 {
     if (is_empty(Q)) {return -1;} //Queue is empty
 
-    if (Q.head == Q.tail) //dequeing last element, resetting queue to empty
+    if (*(Q.head) == *(Q.tail)) //dequeing last element, resetting queue to empty
     {
-        int value = *(Q.head)->val;
+        int value = (*(Q.head))->val;
         free(*(Q.head));
         *(Q.head) = *(Q.tail) = NULL;
         return value;
@@ -50,12 +50,12 @@ int dequeue(Queue* Q)
         int value = (*(Q.head))->val;
         Node* temp = *(Q.head);
         *(Q.head) = (*(Q.head))->next;
-        free(*(Q.head))
+        free(temp);
         return value;
     }
 }
 
-void enqueue(Queue* Q, int x)
+void enqueue(Queue Q, int x)
 {
     if (is_empty(Q)) //queue is empty create a node and make head and tail point to it
     {
@@ -71,8 +71,19 @@ void enqueue(Queue* Q, int x)
         q->val = x;
         q->next = NULL;
         (*(Q.tail))->next = q;
-        (*(Q.tail)) = q;
+        *(Q.tail) = q;
     }
 }
 
+void print_queue(struct Queue q, char *name) {
+    if (is_empty(q)) {
+        printf("The queue %s is empty.\n", name);
+        return;
+    }
 
+    printf("The queue %s is (from head to tail): ", name);
+    for (struct Node *node = *(q.head); node != NULL; node = node->next) {
+        printf("%d ", node->val);
+    }
+    printf("\n");
+}
