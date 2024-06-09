@@ -1,18 +1,15 @@
-#define MAX_SIZE 20
+#define EMPTY_STACK_VALUE -1
 
 typedef struct stack {
     int val;
     struct stack* next;
 } stack;
 
-stack* initStack()
-{
-    stack* S = NULL;
-    return S;
+stack* initStack() {
+    return NULL;  // No need for the S variable
 }
 
-bool push(stack** S, int x)
-{
+bool push(stack** S, int x) {
     stack* p = malloc(sizeof(stack));
     if (p == NULL) return false;
 
@@ -22,29 +19,25 @@ bool push(stack** S, int x)
     return true;
 }
 
-int pop(stack** S)
-{
-    if (*S == NULL) return -1;
+int pop(stack** S) {
+    if (*S == NULL) return EMPTY_STACK_VALUE;
 
-    int pop = (*S)->val;
-    stack* temp = (*S);
+    int popVal = (*S)->val;
+    stack* temp = *S;
     *S = (*S)->next;
     free(temp);
-    return pop;
+    return popVal;
 }
 
-void printStack(stack** S)
-{
-    if (*S == NULL)
-    {
-        printf("Stack is empty!");
+void printStack(stack** S) {
+    if (*S == NULL) {
+        printf("Stack is empty!\n");
         return;
     }
     stack* p = *S;
     int counter = 0;
     printf("Current Stack:\n");
-    while (p != NULL)
-    {
+    while (p != NULL) {
         printf("(%d)\t%d\n", counter, p->val);
         counter++;
         p = p->next;
