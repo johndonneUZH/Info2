@@ -59,3 +59,36 @@ void mergeSort(int* A, int l, int r)
 }
 
 // call:     mergeSort(A, 0, n - 1);
+
+
+// Variation of Merge(A, l, m, r)
+void Merge(int* A, int l, int m, int r)
+{
+    int B[r - l + 1];
+    int i, j, k;
+
+    for (i = l; i <= m; i++)
+    {
+        B[i - l] = A[i];
+    }
+    for (j = m + 1; j <= r; j++)
+    {
+        B[r + m + 1 - j - l] = A[j];
+    }
+
+    i = 0;
+    j = r - l;
+    for (k = l; k <= r; k++)
+    {
+        if (B[i] <= B[j])
+        {
+            A[k] = B[i];
+            i++;
+        }
+        else
+        {
+            A[k] = B[j];
+            j--;
+        }
+    }
+}
