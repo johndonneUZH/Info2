@@ -30,6 +30,18 @@ int hoarePartitionLeft(int* A, int l, int r) {
     }
 }
 
+void quickSortLeft(int* A, int l, int r)
+{
+    if (l < r)
+    {
+        int m = hoarePartitionRight(A, l, r);
+        quickSort(A, l, m);
+        quickSort(A, m+1, r);
+    }
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
 int hoarePartitionRight(int arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
@@ -48,19 +60,19 @@ int hoarePartitionRight(int arr[], int low, int high) {
 
         // If two pointers met
         if (i >= j)
-            return j;
+            return i;
 
         // Swap elements at i and j
         Swap(A, i, j);
     }
 }
 
-void quickSort(int* A, int l, int r)
+void quickSortRight(int* A, int l, int r)
 {
     if (l < r)
     {
         int m = hoarePartitionRight(A, l, r);
-        quickSort(A, l, m);
-        quickSort(A, m+1, r);
+        quickSort(A, l, m-1);
+        quickSort(A, m, r);
     }
 }
