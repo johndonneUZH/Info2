@@ -1,3 +1,8 @@
+/*The maximum-subarray algorithm finds the contiguous subarray that has the largest
+sum within an unsorted array A[0...n-1] of integers. For example, for array A =
+[-2, -5, 6, -2, -3, 1, 5], the maximum subarray is [6, -2, -3, 1, 5].*/
+
+
 typedef struct {
     int leftIndex;
     int rightIndex;
