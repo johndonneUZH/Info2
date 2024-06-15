@@ -24,7 +24,7 @@ DFS(G, s, t)
 			print(Tree Edge)
 			DFS(G, u, t)
 
-		else if s.etime == -1    // still not done with the dfs of v
+		else if u.etime == -1    // still not done with the dfs of v
 			print(Back Edge u to s)
 
 		else if s.stime < u.stime
